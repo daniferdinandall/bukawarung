@@ -3,6 +3,7 @@ include 'db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@ include 'db.php';
     <link rel="stylesheet" href="css/auth.css" media="screen" title="no title">
     <title>Register Page</title>
 </head>
+
 <body>
     <div class="input">
         <h1>REGISTER</h1>
@@ -35,6 +37,10 @@ include 'db.php';
                 <i class="fas fa-lock"></i>
                 <input type="password" name="pass" placeholder="Password">
             </div>
+            <div class="box-input">
+                <i class="fas fa-address-book"></i>
+                <input type="text" name="reff" placeholder="Refferal">
+            </div>
             <button type="submit" name="submit" class="btn-input">REGISTER</button>
             <div class="button">
                 <p style="color: white;">Sudah Punya Akun
@@ -50,9 +56,10 @@ include 'db.php';
             $email    = $_POST['email'];
             $nohp     = $_POST['nohp'];
             $pass     = $_POST['pass'];
+            $reff     = $_POST['reff'];
 
             $insert = mysqli_query($conn, "INSERT INTO tb_user VALUES (
-                null,'" . $name . "','" . $username . "','" . $email . "','" . $nohp . "','" . MD5($pass) . "') ");
+                null,'" . $name . "','" . $username . "','" . $email . "','" . $nohp . "','" . MD5($pass) . "','" . $reff . "') ");
             if ($insert) {
                 echo '<script>alert("Berhasil Daftar")</script>';
                 echo '<script>window.location="masuk.php"</script>';
@@ -63,4 +70,5 @@ include 'db.php';
         ?>
     </div>
 </body>
+
 </html>
