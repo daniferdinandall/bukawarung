@@ -3,7 +3,7 @@ error_reporting(0);
 session_start();
 include 'db.php';
 if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
-    echo '<script>window.location="masuk.php"</script>';
+	echo '<script>window.location="masuk.php"</script>';
 }
 
 $kontak = mysqli_query($conn, "SELECT admin_telp, admin_email, admin_address FROM tb_admin WHERE admin_id = 1");
@@ -32,6 +32,7 @@ $a = mysqli_fetch_object($kontak);
 		});
 	})
 </script>
+
 <body>
 	<!-- header -->
 	<header>
@@ -41,6 +42,7 @@ $a = mysqli_fetch_object($kontak);
 				<li><a href="produk.php">Produk</a></li>
 				<li><a href="cart.php">Cart</a></li>
 				<li><a href="transaksi.php">Transaksi</a></li>
+				<li><a href="profile.php">Profile</a></li>
 				<li><a href="keluar.php">Keluar</a></li>
 			</ul>
 		</div>

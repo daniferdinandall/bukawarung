@@ -29,6 +29,7 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
                 <li><a href="produk.php">Produk</a></li>
                 <li><a href="cart.php">Cart</a></li>
                 <li><a href="transaksi.php">Transaksi</a></li>
+                <li><a href="profile.php">Profile</a></li>
                 <li><a href="keluar.php">Keluar</a></li>
             </ul>
         </div>
@@ -38,78 +39,78 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
         <div class="container">
             <h3>Data Transaksi</h3>
             <?php
-                $transaksi = mysqli_query($conn, "SELECT * FROM `tb_transaksi` WHERE user_id=".$_SESSION['id'].""); 
-                if (mysqli_num_rows($transaksi) > 0) {
-                    while ($trans = mysqli_fetch_array($transaksi)) {
+            $transaksi = mysqli_query($conn, "SELECT * FROM `tb_transaksi` WHERE user_id=" . $_SESSION['id'] . "");
+            if (mysqli_num_rows($transaksi) > 0) {
+                while ($trans = mysqli_fetch_array($transaksi)) {
 
             ?>
-            <div class="box">
-                <h4>Id Transaksi = <?=$trans['transaksi_id']?></h4>
-                <h4>Id Transaksi = <?=$trans['created_at']?></h4>
-                <h4>Total Harga = <?=number_format($trans['harga_total'])?></h4>
-                <h4>Status = <?=$trans['status']?></h4>
-                <table border="1" cellspacing="0" class="table">
-                    <thead>
-                        <tr>
-                            <th width="60px">No</th>
-                            <th>Gambar</th>
-                            <th>Nama Produk</th>
-                            <th>Harga</th>
-                            <th>Kuantitas</th>
-                            <th>Total Harga</th>
+                    <div class="box">
+                        <h4>Id Transaksi = <?= $trans['transaksi_id'] ?></h4>
+                        <h4>Id Transaksi = <?= $trans['created_at'] ?></h4>
+                        <h4>Total Harga = <?= number_format($trans['harga_total']) ?></h4>
+                        <h4>Status = <?= $trans['status'] ?></h4>
+                        <table border="1" cellspacing="0" class="table">
+                            <thead>
+                                <tr>
+                                    <th width="60px">No</th>
+                                    <th>Gambar</th>
+                                    <th>Nama Produk</th>
+                                    <th>Harga</th>
+                                    <th>Kuantitas</th>
+                                    <th>Total Harga</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        $total_harga = 0;
-                        $produk = mysqli_query($conn, "SELECT tb_transaksi_product.qty ,tb_transaksi_product.harga_satuan, 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $total_harga = 0;
+                                $produk = mysqli_query($conn, "SELECT tb_transaksi_product.qty ,tb_transaksi_product.harga_satuan, 
                         tb_product.product_name, tb_product.product_image 
                         FROM tb_transaksi_product 
                         JOIN tb_product ON tb_transaksi_product.product_id=tb_product.product_id
-                        WHERE tb_transaksi_product.transaksi_id = ". $trans['transaksi_id'] ."");
-                        
-                        if (mysqli_num_rows($produk) > 0) {
-                            while ($row = mysqli_fetch_array($produk)) {
-                                
-                                $total_harga +=$row['harga_satuan'] * $row['qty'];
-                                
-                                
-                        ?>
-                        <br>
+                        WHERE tb_transaksi_product.transaksi_id = " . $trans['transaksi_id'] . "");
+
+                                if (mysqli_num_rows($produk) > 0) {
+                                    while ($row = mysqli_fetch_array($produk)) {
+
+                                        $total_harga += $row['harga_satuan'] * $row['qty'];
+
+
+                                ?>
+                                        <br>
                                         <p><a class="btn" href="produk.php">Produk diterima</a></p>
-                            </br>   
+                                        </br>
 
-                                <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td><a href="produk/<?php echo $row['product_image'] ?>" target="_blank"> 
-                                    <img src="produk/<?php echo $row['product_image'] ?>" width="50px"> </a></td>
-                                    <td><?php echo $row['product_name'] ?></td>
-                                    <td style="width: 150px;">Rp. <?php echo number_format($row['harga_satuan']) ?></td>
-                                    <td style="width: 150px;"><?php echo $row['qty'] ?></td>
-                                    <td style="width: 150px;">Rp. <?php echo number_format($row['harga_satuan'] * $row['qty']) ?></td>
-                                    
-                                </tr>
-                            <?php }
-                            
-                        } else { ?>
-                            <tr>
-                                <td colspan="7">Tidak ada data</td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
+                                        <tr>
+                                            <td><?php echo $no++ ?></td>
+                                            <td><a href="produk/<?php echo $row['product_image'] ?>" target="_blank">
+                                                    <img src="produk/<?php echo $row['product_image'] ?>" width="50px"> </a></td>
+                                            <td><?php echo $row['product_name'] ?></td>
+                                            <td style="width: 150px;">Rp. <?php echo number_format($row['harga_satuan']) ?></td>
+                                            <td style="width: 150px;"><?php echo $row['qty'] ?></td>
+                                            <td style="width: 150px;">Rp. <?php echo number_format($row['harga_satuan'] * $row['qty']) ?></td>
 
-            <?php
-                    }}else{
-            ?>
+                                        </tr>
+                                    <?php }
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="7">Tidak ada data</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                <?php
+                }
+            } else {
+                ?>
                 <div class="box">
                     <h4>Belum Ada Transaksi</h4>
                 </div>
             <?php
-                    }
+            }
             ?>
         </div>
     </div>
