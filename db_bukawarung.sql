@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 05:09 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: May 23, 2023 at 01:45 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -227,7 +227,8 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`user_id`, `fullname`, `username`, `email`, `no_telp`, `password`, `reff`) VALUES
-(3, 'dani', 'dani11', 'dani@mail.com', '0982178352', 'fcea920f7412b5da7be0cf42b8c93759', '2bti');
+(3, 'dani f', 'dani11', 'dani@mail.com', '0982178352', 'fcea920f7412b5da7be0cf42b8c93759', '2bti'),
+(4, 'Dimas Ardianto', 'dimasardnt', 'dimas@gmail.com', '089647129890', 'cffbad68bb97a6c3f943538f119c992c', '2bti');
 
 -- --------------------------------------------------------
 
@@ -238,7 +239,7 @@ INSERT INTO `tb_user` (`user_id`, `fullname`, `username`, `email`, `no_telp`, `p
 CREATE TABLE `voucher` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `kode` varchar(10) NOT NULL,
+  `kode` varchar(20) NOT NULL,
   `deskripsi` varchar(254) DEFAULT NULL,
   `reff` varchar(10) NOT NULL,
   `for_all` tinyint(1) NOT NULL,
@@ -246,6 +247,14 @@ CREATE TABLE `voucher` (
   `value` int(11) NOT NULL,
   `max_potongan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `voucher`
+--
+
+INSERT INTO `voucher` (`id`, `nama`, `kode`, `deskripsi`, `reff`, `for_all`, `type`, `value`, `max_potongan`) VALUES
+(2, 'Dani Ferdinan', 'danigacor88', 'test', '2bti', 0, 'nominal', 10, 10000),
+(3, 'dimas', 'dimasgacor777', 'test guys', '2bti', 0, 'persen', 20, 20000);
 
 --
 -- Indexes for dumped tables
@@ -345,13 +354,13 @@ ALTER TABLE `tb_transaksi_product`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
