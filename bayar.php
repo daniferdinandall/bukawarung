@@ -81,9 +81,31 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
                                 $total_harga += $row['product_price'] * $row['qty'];
                             }
                         }
+
+                        //voucher
+                        $potongan = 0;
+                        $pesan_d = "";
+                        $cart_v2 = mysqli_query($conn, "SELECT voucher.id, voucher.value, voucher.type, voucher.max_potongan FROM tb_cart_voucher JOIN voucher ON tb_cart_voucher.kode=voucher.kode WHERE tb_cart_voucher.user_id = 5");
+                        if (mysqli_num_rows($cart_v2) > 0) {
+                            $cv = mysqli_fetch_object($cart_v2);
+                            if ($cv->type == "persen") {
+                                $pesan_d = $cv->value . "Persen";
+                                $potongan = $total_harga * ($cv->value / 100);
+                                if ($cv->max_potongan) {
+                                    $potongan = $cv->max_potongan;
+                                }
+                            } else {
+                                $pesan_d = $cv->value . "Rupiah";
+                                $potongan = $cv->value;
+                            }
+
+                            mysqli_query($conn, "DELETE FROM `tb_cart_voucher` WHERE `user_id` = " . $_SESSION['id'] . "");
+                            mysqli_query($conn, "INSERT INTO `tb_riwayat_voucher` VALUES (null, " . $_SESSION['id'] . ", " . $cv->id . ", current_timestamp())");
+                        }
+                        $harga_bayar = $total_harga - $potongan;
                         $insert = mysqli_query($conn, "INSERT INTO tb_transaksi VALUES (
 										null,'" . $_SESSION['id'] . "',null,'menunggu konfirmasi','" . $newname .
-                                         "'," . $total_harga . ") ");
+                            "'," . $total_harga . "," . $harga_bayar . "," . $potongan . ") ");
                         $idt = mysqli_insert_id($conn);
                         if ($insert) {
                             $produk = mysqli_query($conn, "SELECT tb_product.product_id,tb_cart.id, tb_cart.qty, 
@@ -96,14 +118,19 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
                                 var_dump($idt);
                                 while ($row = mysqli_fetch_array($produk)) {
                                     echo mysqli_num_rows($produk);
-                                    $insert_p = mysqli_query($conn, "INSERT INTO tb_transaksi_product VALUES (null, " . 
-                                    $idt . ", " . $row['product_id'] . ", " . $row['qty'] . "," . $row['product_price'] . ")");
+                                    $insert_p = mysqli_query($conn, "INSERT INTO tb_transaksi_product VALUES (null, " .
+                                        $idt . ", " . $row['product_id'] . ", " . $row['qty'] . "," . $row['product_price'] . ")");
 
-                                    mysqli_query($conn, "UPDATE `tb_product` SET `stok` = stok - " . $row['qty'] . 
-                                    "  WHERE `tb_product`.`product_id` = " . $row['product_id'] . ";");
+                                    mysqli_query($conn, "UPDATE `tb_product` SET `stok` = stok - " . $row['qty'] .
+                                        "  WHERE `tb_product`.`product_id` = " . $row['product_id'] . ";");
                                 }
                             }
                             mysqli_query($conn, "DELETE FROM `tb_cart` WHERE `tb_cart`.`user_id` = " . $_SESSION['id'] . "");
+
+                            // cek voucher
+                            //jika ada 
+
+
                             echo '<script>alert("Tambah data berhasil")</script>';
                             echo '<script>window.location="transaksi.php"</script>';
                         } else {

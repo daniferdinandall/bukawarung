@@ -48,6 +48,8 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
                         <h4>Id Transaksi = <?= $trans['transaksi_id'] ?></h4>
                         <h4>Id Transaksi = <?= $trans['created_at'] ?></h4>
                         <h4>Total Harga = <?= number_format($trans['harga_total']) ?></h4>
+                        <h4>Total Diskon = <?= number_format($trans['total_potongan']) ?></h4>
+                        <h4>Total Bayar = <?= number_format($trans['harga_bayar']) ?></h4>
                         <h4>Status = <?= $trans['status'] ?></h4>
                         <table border="1" cellspacing="0" class="table">
                             <thead>
@@ -78,9 +80,9 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'user') {
 
 
                                 ?>
-                                        <br>
+                                        <!-- <br>
                                         <p><a class="btn" href="produk.php">Produk diterima</a></p>
-                                        </br>
+                                        </br> -->
 
                                         <tr>
                                             <td><?php echo $no++ ?></td>

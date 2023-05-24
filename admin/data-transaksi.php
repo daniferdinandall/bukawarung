@@ -42,7 +42,7 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'admin') {
             <h3>Data Transaksi</h3>
             <?php
             $transaksi = mysqli_query($conn, "SELECT tb_transaksi.transaksi_id, tb_transaksi.user_id, tb_transaksi.created_at, 
-            tb_transaksi.status, tb_transaksi.bukti_pembayaran, tb_transaksi.harga_total, tb_user.fullname FROM `tb_transaksi` 
+            tb_transaksi.status, tb_transaksi.bukti_pembayaran, tb_transaksi.harga_total,tb_transaksi.total_potongan,tb_transaksi.harga_bayar, tb_user.fullname FROM `tb_transaksi` 
             JOIN tb_user on tb_transaksi.user_id=tb_user.user_id ORDER BY tb_transaksi.created_at DESC");
             if (mysqli_num_rows($transaksi) > 0) {
                 while ($trans = mysqli_fetch_array($transaksi)) {
@@ -51,6 +51,8 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'admin') {
                         <h4>Nama Pemesan = <?= $trans['fullname'] ?></h4>
                         <h4>Id Transaksi = <?= $trans['transaksi_id'] ?></h4>
                         <h4>Total Harga = <?= number_format($trans['harga_total']) ?></h4>
+                        <h4>Total Diskon = <?= number_format($trans['total_potongan']) ?></h4>
+                        <h4>Total Bayar = <?= number_format($trans['harga_bayar']) ?></h4>
                         <h4 style="margin-bottom: 30px;">Status = <?= $trans['status'] ?></h4>
 
                         <span style="display: inline-block; margin-right: 30px;">
