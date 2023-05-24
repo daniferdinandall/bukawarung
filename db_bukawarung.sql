@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 01:45 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: May 24, 2023 at 04:52 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,26 @@ CREATE TABLE `tb_cart` (
 --
 
 INSERT INTO `tb_cart` (`id`, `user_id`, `product_id`, `qty`) VALUES
-(25, 3, 5, 1);
+(25, 3, 5, 1),
+(33, 5, 5, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_cart_voucher`
+--
+
+CREATE TABLE `tb_cart_voucher` (
+  `user_id` int(11) NOT NULL,
+  `kode` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_cart_voucher`
+--
+
+INSERT INTO `tb_cart_voucher` (`user_id`, `kode`) VALUES
+(5, 'gacor');
 
 -- --------------------------------------------------------
 
@@ -114,9 +133,9 @@ CREATE TABLE `tb_product` (
 --
 
 INSERT INTO `tb_product` (`product_id`, `category_id`, `product_name`, `product_price`, `product_description`, `product_image`, `product_status`, `data_created`, `stok`) VALUES
-(5, 4, 'laptop Hp', 4000000, '<p><strong>Untuk Anda </strong>dibidang editing, dengan layar 360 derajat serta tauchscreen dan dilengkapi dengan stylus.</p>\r\n', 'produk1589853135.png', 1, '2020-05-19 01:52:15', 47),
-(6, 4, 'laptop Lenovo', 6000000, '<p><strong>Khusus&nbsp;</strong>Anda yang suka bekerja dimana saja. dengan bobot ringan sehingga nyaman dibawa kemana mana.</p>\r\n', 'produk1589853165.png', 1, '2020-05-19 01:52:45', 49),
-(7, 4, 'laptop acer', 8000000, '<p>Cokok, Untuk anak pekerjaan Office dan editing ringan&nbsp;</p>\r\n', 'produk1589853182.png', 1, '2020-05-19 01:53:02', 1),
+(5, 4, 'laptop Hp', 4000000, '<p><strong>Untuk Anda </strong>dibidang editing, dengan layar 360 derajat serta tauchscreen dan dilengkapi dengan stylus.</p>\r\n', 'produk1589853135.png', 1, '2020-05-19 01:52:15', 44),
+(6, 4, 'laptop Lenovo', 6000000, '<p><strong>Khusus&nbsp;</strong>Anda yang suka bekerja dimana saja. dengan bobot ringan sehingga nyaman dibawa kemana mana.</p>\r\n', 'produk1589853165.png', 1, '2020-05-19 01:52:45', 48),
+(7, 4, 'laptop acer', 8000000, '<p>Cokok, Untuk anak pekerjaan Office dan editing ringan&nbsp;</p>\r\n', 'produk1589853182.png', 1, '2020-05-19 01:53:02', 0),
 (8, 5, 'handphone Advan C5', 1000000, '<p><strong>Hp Lokal,&nbsp;</strong>&nbsp;Kualitas Impor</p>\r\n', 'produk1589853203.png', 1, '2020-05-19 01:53:23', 50),
 (9, 5, 'handphone Esia Hidayah', 1500000, '<p><strong>Bundling&nbsp;</strong>dengan kartu Esia 2,5 GB selama 6 Bulan</p>\r\n', 'produk1589853226.png', 1, '2020-05-19 01:53:46', 50),
 (10, 5, 'handphone nokia n212', 2500000, '<p><strong>Pertama!!&nbsp;</strong>dengan jaringan 3G</p>\r\n', 'produk1589853256.png', 1, '2020-05-19 01:54:16', 49),
@@ -128,8 +147,8 @@ INSERT INTO `tb_product` (`product_id`, `category_id`, `product_name`, `product_
 (16, 8, 'pakaian wanita santai', 200000, '<p><strong>Pakaian Santai,&nbsp;</strong>nyaman dipakai sehari hari.</p>\r\n', 'produk1589853410.png', 1, '2020-05-19 01:56:50', 50),
 (17, 8, 'pakaian atasan merah', 400000, '<p><strong>Model Fasion Terkini,&nbsp;</strong>dapat selama stok masih ada.</p>\r\n', 'produk1589853431.png', 1, '2020-05-19 01:57:11', 50),
 (18, 9, 'pisang', 150000, '<p><strong>Pisang Segar,&nbsp;</strong>Cocok untuk dimakan langsung maupun dibuat jus atau <em>milkshake</em></p>\r\n', 'produk1589853455.png', 1, '2020-05-19 01:57:35', 50),
-(19, 9, 'rambutan', 20000, '<p><strong>Rambutan Segar,</strong>&nbsp;lengkapi kebutuhan nutrisi anda dengan memakan buah yang berkualitas setiap hari.</p>\r\n', 'produk1589853479.png', 1, '2020-05-19 01:57:59', 49),
-(20, 10, 'brokoli', 30000, '<p><strong>Brokoli Hijau Pilihan Petani Lokal</strong>, dipetik langsung dengan tangan tangan petani lokal yang berpengalaman.</p>\r\n', 'produk1589853498.png', 1, '2020-05-19 01:58:18', 48),
+(19, 9, 'rambutan', 20000, '<p><strong>Rambutan Segar,</strong>&nbsp;lengkapi kebutuhan nutrisi anda dengan memakan buah yang berkualitas setiap hari.</p>\r\n', 'produk1589853479.png', 1, '2020-05-19 01:57:59', 48),
+(20, 10, 'brokoli', 30000, '<p><strong>Brokoli Hijau Pilihan Petani Lokal</strong>, dipetik langsung dengan tangan tangan petani lokal yang berpengalaman.</p>\r\n', 'produk1589853498.png', 1, '2020-05-19 01:58:18', 45),
 (21, 10, 'sayur kol', 40000, '<p>Kol segar yang dipanen langsung dari kebun.</p>\r\n', 'produk1589853518.png', 1, '2020-05-19 01:58:38', 46);
 
 -- --------------------------------------------------------
@@ -167,12 +186,12 @@ CREATE TABLE `tb_transaksi` (
 --
 
 INSERT INTO `tb_transaksi` (`transaksi_id`, `user_id`, `created_at`, `status`, `bukti_pembayaran`, `harga_total`, `harga_bayar`, `total_potongan`) VALUES
-(32, 3, '2022-08-12 07:20:04', 'Barang Telah Dikirim', 'bukti_bayar1660288804.png', 160000, 0, 0),
-(33, 3, '2022-08-15 13:56:19', 'Pembayaran Tidak Valid', 'bukti_bayar1660571779.png', 70000, 0, 0),
-(34, 3, '2022-08-15 14:05:18', 'Barang Telah Dikirim', 'bukti_bayar1660572318.png', 2500000, 0, 0),
-(35, 3, '2022-08-16 07:03:38', 'Barang Telah Dikirim', 'bukti_bayar1660633418.png', 6070000, 0, 0),
-(36, 3, '2022-08-18 04:20:53', 'Pembayaran Tidak Valid', 'bukti_bayar1660796453.png', 14030000, 0, 0),
-(37, 3, '2022-08-25 02:24:39', 'Barang Telah Dikirim', 'bukti_bayar1661394279.png', 50000, 0, 0);
+(38, 5, '2023-05-24 01:07:22', 'Barang Telah Dikirim', 'bukti_bayar1684890442.png', 110000, 100000, 10000),
+(39, 5, '2023-05-24 01:22:11', 'Barang Telah Dikirim', 'bukti_bayar1684891331.png', 6000000, 5980000, 20000),
+(40, 5, '2023-05-24 01:33:00', 'Barang Telah Dikirim', 'bukti_bayar1684891980.png', 4000000, 4000000, 0),
+(41, 5, '2023-05-24 01:38:04', 'Barang Telah Dikirim', 'bukti_bayar1684892284.png', 8000000, 7990000, 10000),
+(42, 5, '2023-05-24 01:40:02', 'Barang Telah Dikirim', 'bukti_bayar1684892402.png', 4000000, 3990000, 10000),
+(43, 5, '2023-05-24 01:56:51', 'Barang Telah Dikirim', 'bukti_bayar1684893411.png', 4000000, 3990000, 10000);
 
 -- --------------------------------------------------------
 
@@ -204,7 +223,14 @@ INSERT INTO `tb_transaksi_product` (`id_tp`, `transaksi_id`, `product_id`, `qty`
 (21, 36, 7, 1, 8000000),
 (22, 36, 20, 1, 30000),
 (23, 37, 20, 1, 30000),
-(24, 37, 19, 1, 20000);
+(24, 37, 19, 1, 20000),
+(25, 38, 20, 3, 30000),
+(26, 38, 19, 1, 20000),
+(27, 39, 6, 1, 6000000),
+(28, 40, 5, 1, 4000000),
+(29, 41, 7, 1, 8000000),
+(30, 42, 5, 1, 4000000),
+(31, 43, 5, 1, 4000000);
 
 -- --------------------------------------------------------
 
@@ -228,7 +254,8 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`user_id`, `fullname`, `username`, `email`, `no_telp`, `password`, `reff`) VALUES
 (3, 'dani f', 'dani11', 'dani@mail.com', '0982178352', 'fcea920f7412b5da7be0cf42b8c93759', '2bti'),
-(4, 'Dimas Ardianto', 'dimasardnt', 'dimas@gmail.com', '089647129890', 'cffbad68bb97a6c3f943538f119c992c', '2bti');
+(4, 'Dimas Ardianto', 'dimasardnt', 'dimas@gmail.com', '089647129890', 'cffbad68bb97a6c3f943538f119c992c', '2bti'),
+(5, 'adit', 'adit123', 'adit@mail.com', '08987654', '25f9e794323b453885f5181f1b624d0b', '2bti');
 
 -- --------------------------------------------------------
 
@@ -253,8 +280,8 @@ CREATE TABLE `voucher` (
 --
 
 INSERT INTO `voucher` (`id`, `nama`, `kode`, `deskripsi`, `reff`, `for_all`, `type`, `value`, `max_potongan`) VALUES
-(2, 'Dani Ferdinan', 'danigacor88', 'test', '2bti', 0, 'nominal', 10, 10000),
-(3, 'dimas', 'dimasgacor777', 'test guys', '2bti', 0, 'persen', 20, 20000);
+(2, 'Dani Ferdinan', 'danigacor88', 'test', '2bti', 0, 'nominal', 10000, 10000),
+(3, 'dimas', 'gacor', 'test guys', '2bti', 0, 'persen', 20, 20000);
 
 --
 -- Indexes for dumped tables
@@ -273,6 +300,12 @@ ALTER TABLE `tb_cart`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_cart_voucher`
+--
+ALTER TABLE `tb_cart_voucher`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Indexes for table `tb_category`
 --
 ALTER TABLE `tb_category`
@@ -284,6 +317,12 @@ ALTER TABLE `tb_category`
 ALTER TABLE `tb_product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `tb_riwayat_voucher`
+--
+ALTER TABLE `tb_riwayat_voucher`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tb_transaksi`
@@ -324,7 +363,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
@@ -339,22 +378,28 @@ ALTER TABLE `tb_product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `tb_riwayat_voucher`
+--
+ALTER TABLE `tb_riwayat_voucher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi_product`
 --
 ALTER TABLE `tb_transaksi_product`
-  MODIFY `id_tp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_tp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `voucher`
