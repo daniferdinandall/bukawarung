@@ -11,7 +11,7 @@ if (isset($_POST['qty'])) {
     $update = mysqli_query($conn, "UPDATE tb_cart SET qty = " . $_POST['qty'] . " WHERE tb_cart.id = " . $_POST['cid'] . "");
 }
 if (isset($_POST['cek'])) {
-    
+
     //cek apakah ada voucher
     $aksesVoucher = false;
     $voucher = mysqli_query($conn, "SELECT * FROM voucher WHERE kode = '" . $_POST['kodev'] . "'");
@@ -22,7 +22,7 @@ if (isset($_POST['cek'])) {
         $sc_v = mysqli_query($conn, "SELECT * FROM `tb_riwayat_voucher` WHERE `id_voucher`=$v->id AND `uid` = $userId");
         if (mysqli_num_rows($sc_v) > 0) {
             echo "<script>alert('voucher sudah pernah dipakai')</script>";
-        }else{
+        } else {
             // echo $_POST['kodev'];
             if ($v->for_all == 0) {
                 // get referal user
@@ -158,20 +158,20 @@ if (isset($_POST['cek'])) {
                 <?php
                 if (mysqli_num_rows($produk) > 0) {
                     $potongan = 0;
-                    $kodeV="";
+                    $kodeV = "";
                     $pesan_d = "";
-                    $cart_v2 = mysqli_query($conn, "SELECT voucher.kode, voucher.value, voucher.type, voucher.max_potongan FROM tb_cart_voucher JOIN voucher ON tb_cart_voucher.kode=voucher.kode WHERE tb_cart_voucher.user_id = 5");
+                    $cart_v2 = mysqli_query($conn, "SELECT voucher.kode, voucher.value, voucher.type, voucher.max_potongan FROM tb_cart_voucher JOIN voucher ON tb_cart_voucher.kode=voucher.kode WHERE tb_cart_voucher.user_id = $userId");
                     if (mysqli_num_rows($cart_v2) > 0) {
                         $cv = mysqli_fetch_object($cart_v2);
-                        $kodeV=$cv->kode;
+                        $kodeV = $cv->kode;
                         if ($cv->type == "persen") {
-                            $pesan_d="<p>Diskon ".$cv->value . " Persen<p/><p>Maksimal potongan Rp. $cv->max_potongan Rupiah</p>";
+                            $pesan_d = "<p>Diskon " . $cv->value . " Persen<p/><p>Maksimal potongan Rp. $cv->max_potongan Rupiah</p>";
                             $potongan = $total_harga * ($cv->value / 100);
                             if ($cv->max_potongan) {
                                 $potongan = $cv->max_potongan;
                             }
                         } else {
-                            $pesan_d=$cv->value . "Rupiah";
+                            $pesan_d = $cv->value . "Rupiah";
                             $potongan = $cv->value;
                         }
                     }
@@ -179,7 +179,7 @@ if (isset($_POST['cek'])) {
                     <br>
                     <form action="" method="post">
 
-                        <input required style="padding: 8px; margin-right: 20px;" type="text" name="kodev" placeholder="Voucher" value="<?=$kodeV?>">
+                        <input required style="padding: 8px; margin-right: 20px;" type="text" name="kodev" placeholder="Voucher" value="<?= $kodeV ?>">
                         <!-- <a class="btn" href="bayar.php?id=<?= $_SESSION['id'] ?>">Cek</a> -->
                         <button type="submit" name="cek" class="btn"><b>Cek Voucher</b></button>
                         <!-- <button style="background-color: tomato; color: black;" type="reset" name="reset" class="btn"><b>Batal</b></button> -->

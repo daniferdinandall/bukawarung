@@ -39,7 +39,7 @@ if ($_SESSION['status_login'] != true || $_SESSION['type'] != 'admin') {
         <div class="container">
             <h3>Data Produk</h3>
             <div class="box">
-                <p><a class="btn" href="tambah-produk.php">Tambah Data</a></p>
+                <p><a class="btn" href="tambah-voucher.php">Tambah Data</a></p>
                 <br>
                 <table border="1" cellspacing="0" class="table">
                     <thead>
